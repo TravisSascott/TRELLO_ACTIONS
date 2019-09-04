@@ -3,37 +3,17 @@
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
-var fiftyButton = document.getElementById('fifty');
-var contentButton = document.getElementById('btn-content');
-var fiveHundredButton = document.getElementById('five-hundred');
+const buttons = document.getElementsByTagName("button")
 
-t.render(function(){
-  // return Promise.all([
-  //   t.get('board', 'shared', 'fruit'),
-  //   t.get('board', 'private', 'vegetable')
-  // ])
-  // .spread(function(savedFruit, savedVegetable){
-  //   if(savedFruit && /[a-z]+/.test(savedFruit)){
-  //     fruitSelector.value = savedFruit;
-  //   }
-  //   if(savedVegetable && /[a-z]+/.test(savedVegetable)){
-  //     vegetableSelector.value = savedVegetable;
-  //   }
-  // })
-  // .then(function(){
-  //   t.sizeTo('#content')
-  //   .done();
-  // })
-});
+// https://developers.trello.com/reference#t-sizeto
+const sizeToMap = {
+  "document": document.body, // A DOM element that will be measured and we will use the height of
+  "btn-content": "#content", // A DOM query selector that will select the node to measure and use the height of
+  "five-hundred": 500 // A positive number that will be used directly for the height
+};
 
-document.getElementBy
-
-// document.getElementById('save').addEventListener('click', function(){
-//   return t.set('board', 'private', 'vegetable', vegetableSelector.value)
-//   .then(function(){
-//     return t.set('board', 'shared', 'fruit', fruitSelector.value);
-//   })
-//   .then(function(){
-//     t.closePopup();
-//   })
-// })
+for (let buttonEl of buttons) {
+  buttonEl.addEventListener("click", function(e) {
+    t.sizeTo(sizeToMap[e.target.id]);
+  })
+};

@@ -332,6 +332,17 @@ TrelloPowerUp.initialize({
   'card-badges': function(t, options){
     return getBadges(t);
   },
+  'card-back-section': function (t, options){
+    return {
+      title: 'My Card Back Section',
+      icon: GRAY_ICON, // Must be a gray icon, colored icons not allowed.
+      content: {
+        type: 'iframe',
+        url: t.signUrl('./card-back-section.html'),
+        height: 230 // Max height is 500
+      }
+    };
+  },
   'card-buttons': function(t, options) {
     return [{
       // usually you will provide a callback function to be run on button click

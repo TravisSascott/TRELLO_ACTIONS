@@ -17,6 +17,7 @@ This example Power-Up makes use of the following capabilities:
 * attachment-sections
 * attachment-thumbnail
 * board-buttons
+* card-back-section
 * card-badges
 * card-buttons
 * card-detail-badges

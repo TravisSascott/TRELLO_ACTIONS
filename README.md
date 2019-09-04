@@ -24,7 +24,7 @@ This example Power-Up makes use of the following capabilities:
 * card-from-url
 * format-url
 * show-authorization
-* show-setting
+* show-settings
 
 So make sure to turn them all on when filling out the form. You'll also need a URL for an icon. You can use the sample one we have here: [https://cdn.glitch.com/2442c68d-7b6d-4b69-9d13-feab530aa88e%2Fglitch-icon.svg?1489773457908](https://cdn.glitch.com/2442c68d-7b6d-4b69-9d13-feab530aa88e%2Fglitch-icon.svg?1489773457908).
 

@@ -1,0 +1,9 @@
+body {
+  outline: 2px dashed blue;
+  margin: 5px;
+}
+
+#content {
+  outline: 2px dotted red;
+  margin: 5px;
+}

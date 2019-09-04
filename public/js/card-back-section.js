@@ -26,6 +26,8 @@ t.render(function(){
   // })
 });
 
+document.getElementBy
+
 // document.getElementById('save').addEventListener('click', function(){
 //   return t.set('board', 'private', 'vegetable', vegetableSelector.value)
 //   .then(function(){

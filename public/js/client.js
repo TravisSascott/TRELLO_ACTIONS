@@ -192,17 +192,25 @@ var boardButtonCallback = function(t){
         text: 'Try Out t.navigate()',
         callback: function(t){
           return t.popup({
-            title: 'Snooze Card',
+            title: 't.navigate() Flavors',
             items: [{
-              // https://trello.com/b/K3k1CNLD/holiday-meal-planning?menu=filter&filter=label:Faux%20Thanks%20Giving
-              text: 't.navigate('')',
-              callback: function (t, opts) { ... }
+              // https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green
+              text: 't.navigate(boardUrl) (internal)',
+              callback: function (t, opts) {
+                return t.navigate({url: 'https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green'})
+              }
+            },{
+              // https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green OR https://trello.com/b/K3k1CNLD/holiday-meal-planning?menu=filter&filter=label:Sides
+              text: 't.navigate(boardUrl) (external)',
+              callback: function (t, opts) {
+                return t.navigate({url: 'https://trello.com/b/K3k1CNLD/holiday-meal-planning?menu=filter&filter=label:Sides'})
+              }
             }, {
-              text: 'In 1 hour',
-              callback: function (t, opts) { ... }
-            }, {
-              text: 'In 2 hours',
-              callback: function (t, opts) { ... }
+              // https://trello.com/c/3Zb4GlkC/2-card
+              text: 't.navigate(cardUrl)',
+              callback: function (t, opts) {
+                return t.navigate({url: 'https://trello.com/c/3Zb4GlkC/2-card'})
+              }
             }]
           });
         }

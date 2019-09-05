@@ -3,7 +3,7 @@
 var t = TrelloPowerUp.iframe();
 
 // you can access arguments passed to your iframe like so
-var fullscreen = t.arg('fullscreen');
+window.fullscreen = t.arg('fullscreen');
 
 const resizeButtonText = document.getElementById("resizeButtonText");
 const resizeButton = document.getElementById("resizeButton");
@@ -14,19 +14,22 @@ t.render(function(){
   // you might want to react to, such as new data being
   // stored with t.set()
   
-  t.sizeTo(document.body);
+  if (window.fullscreen) {
+    t.sizeTo("#content");  
+  }
   
-  const newText = document.createTextNode(!fullscreen);
+  const newText = document.createTextNode(!window.fullscreen);
   resizeButtonText.appendChild(newText);
   
   resizeButton.addEventListener("click", function(event) {
     console.log(`hi`);
     event.preventDefault();
     t.updateModal({ 
-      accentColor: "#9900CC",
+      accentColor: '#'+Math.floor(Math.random()*16777215).toString(16),
       title: 'Updated Modal',
-      fullscreen: false
-    });    
+      fullscreen: !window.fullscreen
+    });
+    window.fullscreen = !window.fullscreen;
   });
   
 });

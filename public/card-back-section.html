@@ -6,16 +6,27 @@
   </head>
   <body>
     <div id="content">
-      This is the <b>#content</b> div.
-      
-      "document": document.body, // A DOM element that will be measured and we will use the height of
-  "btn-content": "#content", // A DOM query selector that will select the node to measure and use the height of
-  "five-hundred": 500 // A positive number that will be used directly for the height
-      <br/>
-      <button class="btn" id="document">sizeTo() document.body</button>
-      <button id="btn-content" >sizeTo() #content</button>
-      <button id="five-hundred">sizeTo() 500px</button>
+      <p>
+        This is the <b>#content</b> &#60;div&#62; and it is outlined in red. The &#60;body&#62; is outlined in blue.
+      </p>
+      <p>There are three types of parameters you can pass to <i>.sizeTo()</i>:</p>
+      <p>
+        <b>DOM element</b>: A DOM element that will be measured and we will use the height of
+        <pre>t.sizeTo(document.body);</pre>
+        <button class="btn-primary" id="document">sizeTo() document.body</button>
+      </p>
+      <p>
+        <b>DOM query selector</b>: A DOM query selector that will select the node to measure and use the height of
+        <pre>t.sizeTo("#btn-content");</pre>
+        <button class="btn-primary" id="btn-content" >sizeTo() #content</button>
+      </p>
+      <p>
+        <b>Positive Number</b>: A positive number that will be used directly for the height
+        <pre>t.sizeTo(500);</pre>
+        <button class="btn-primary" id="five-hundred">sizeTo() 500px</button>
+      </p>
     </div>
+    This is the <b>body</b>.
     <script src="./js/card-back-section.js"></script>
   </body>
 </html>

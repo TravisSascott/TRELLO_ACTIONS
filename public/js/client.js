@@ -187,33 +187,6 @@ var boardButtonCallback = function(t){
             return t.closePopup();
           });
         }
-      },
-      {
-        text: 'Try Out t.navigate()',
-        callback: function(t){
-          return t.popup({
-            title: 't.navigate() Flavors',
-            items: [{
-              // https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green
-              text: 't.navigate(boardUrl) (internal)',
-              callback: function (t, opts) {
-                return t.navigate({url: 'https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green'})
-              }
-            },{
-              // https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green OR https://trello.com/b/K3k1CNLD/holiday-meal-planning?menu=filter&filter=label:Sides
-              text: 't.navigate(boardUrl) (external)',
-              callback: function (t, opts) {
-                return t.navigate({url: 'https://trello.com/b/K3k1CNLD/holiday-meal-planning?menu=filter&filter=label:Sides'})
-              }
-            }, {
-              // https://trello.com/c/3Zb4GlkC/2-card
-              text: 't.navigate(cardUrl)',
-              callback: function (t, opts) {
-                return t.navigate({url: 'https://trello.com/c/3Zb4GlkC/2-card'})
-              }
-            }]
-          });
-        }
       }
     ]
   });
@@ -354,6 +327,33 @@ TrelloPowerUp.initialize({
       text: 'URL',
       url: 'https://trello.com/inspiration',
       target: 'Inspiring Boards' // optional target for above url
+    },
+    {
+      text: 'Try Out t.navigate()',
+      callback: function(t){
+        return t.popup({
+          title: 't.navigate() Flavors',
+          items: [{
+            // https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green
+            text: 't.navigate(boardUrl) (internal)',
+            callback: function (t, opts) {
+              return t.navigate({url: 'https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green'})
+            }
+          },{
+            // https://trello.com/b/Yc8MHkrS/trello-power-up-test-board?menu=filter&filter=label:green OR https://trello.com/b/K3k1CNLD/holiday-meal-planning?menu=filter&filter=label:Sides
+            text: 't.navigate(boardUrl) (external)',
+            callback: function (t, opts) {
+              return t.navigate({url: 'https://trello.com/b/K3k1CNLD/holiday-meal-planning?menu=filter&filter=label:Sides'})
+            }
+          }, {
+            // https://trello.com/c/3Zb4GlkC/2-card
+            text: 't.navigate(cardUrl)',
+            callback: function (t, opts) {
+              return t.navigate({url: 'https://trello.com/c/3Zb4GlkC/2-card'})
+            }
+          }]
+        });
+      }
     }];
   },
   'card-badges': function(t, options){

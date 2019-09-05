@@ -32,6 +32,6 @@ t.render(function(){
 });
 
 
-document.body.addEventListener("ondblclick", function(event) {
+document.body.addEventListener("dblclick", function(event) {
   console.log("You double-clicked!");
 })

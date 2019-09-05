@@ -1,5 +1,6 @@
 dependencies:
   compression: 1.7.4
+  confetti-js: 0.0.15
   cors: 2.8.5
   express: 4.17.1
 packages:
@@ -67,6 +68,10 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha512-jaSIDzP9pZVS4ZfQ+TzvtiWhdpFhE2RDHz8QJkpX9SIpLq88VueF5jJw6t+6CUQcAoA6t+x89MLrWAqpfDE8iQ==
+  /confetti-js/0.0.15:
+    dev: false
+    resolution:
+      integrity: sha512-Y3rwiQ7boCujKlHzs2yoaJhz8dbREUFSgl6iWvDRopT30cqx2t9AfS/la6FgTPuvC1DktYrWGt70jiajNcVZeA==
   /content-disposition/0.5.3:
     dependencies:
       safe-buffer: 5.1.2
@@ -445,5 +450,6 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   compression: ^1.7.1
+  confetti-js: ^0.0.15
   cors: ^2.8.5
   express: ^4.16.2

@@ -10,7 +10,8 @@
   "dependencies": {
     "compression": "^1.7.1",
     "cors": "^2.8.5",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "confetti-js": "^0.0.15"
   },
   "engines": {
     "node": "12"

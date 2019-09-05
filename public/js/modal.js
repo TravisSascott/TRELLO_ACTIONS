@@ -33,5 +33,8 @@ t.render(function(){
 
 
 document.body.addEventListener("dblclick", function(event) {
-  console.log("You double-clicked!");
+  t.popup({
+    url: './celebrate.html'
+    args: {}
+  })
 })

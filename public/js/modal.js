@@ -14,22 +14,19 @@ t.render(function(){
   // you might want to react to, such as new data being
   // stored with t.set()
   
-  if (window.fullscreen) {
-    t.sizeTo("#content");  
-  }
-  
-  const newText = document.createTextNode(!window.fullscreen);
-  resizeButtonText.appendChild(newText);
-  
   resizeButton.addEventListener("click", function(event) {
-    console.log(`hi`);
     event.preventDefault();
     t.updateModal({ 
       accentColor: '#'+Math.floor(Math.random()*16777215).toString(16),
       title: 'Updated Modal',
       fullscreen: !window.fullscreen
     });
+    if (window.fullscreen) {
+      // We can only sizeTo when fullscreen: false.
+      t.sizeTo(document.body);  
+    }
     window.fullscreen = !window.fullscreen;
+    resizeButtonText.innerText = !window.fullscreen;
   });
   
 });

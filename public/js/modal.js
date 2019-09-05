@@ -30,3 +30,8 @@ t.render(function(){
   });
   
 });
+
+
+document.body.addEventListener("ondblclick", function(event) {
+  console.log("You double-clicked!");
+})

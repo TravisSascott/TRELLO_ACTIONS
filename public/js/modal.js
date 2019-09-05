@@ -14,7 +14,7 @@ t.render(function(){
   // you might want to react to, such as new data being
   // stored with t.set()
   
-  
+  t.sizeTo(document.body);
   
   const newText = document.createTextNode(!fullscreen);
   resizeButtonText.appendChild(newText);
@@ -23,7 +23,7 @@ t.render(function(){
     console.log(`hi`);
     event.preventDefault();
     t.updateModal({ 
-      accentColor: "000000",
+      accentColor: "#9900CC",
       title: 'Updated Modal',
       fullscreen: false
     });    

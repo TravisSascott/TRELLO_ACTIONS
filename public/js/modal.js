@@ -15,10 +15,18 @@ t.render(function(){
   // stored with t.set()
   
   
-  resizeButtonText.value = !fullscreen;
+  
+  const newText = document.createTextNode(!fullscreen);
+  resizeButtonText.appendChild(newText);
+  
   resizeButton.addEventListener("click", function(event) {
+    console.log(`hi`);
     event.preventDefault();
-    t.updateModal({ fullscreen: !fullscreen });    
+    t.updateModal({ 
+      accentColor: "000000",
+      title: 'Updated Modal',
+      fullscreen: false
+    });    
   });
   
 });

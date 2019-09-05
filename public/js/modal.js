@@ -34,7 +34,9 @@ t.render(function(){
 
 document.body.addEventListener("dblclick", function(event) {
   t.popup({
-    url: './celebrate.html'
-    args: {}
+    mouseEvent: event,
+    url: './celebrate.html',
+    title: '🎉 🎉 🎉 Well done! 🎉 🎉 🎉',
+    args: { message: 'Nice double-click!' }
   })
 })

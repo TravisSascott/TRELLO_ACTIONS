@@ -7,23 +7,23 @@
   <body>
     <div id="content">
       <p>
-        This is the <b>#content</b> <code>&#60;div&#62;</code> and it is outlined in red. The <code>&#60;body&#62;</code> is outlined in blue.
+        This is the <b>#content</b> <code>&#60;div&#62;</code> and it is outlined in <span style="color: red">red</span>. The <code>&#60;body&#62;</code> is outlined in <span style="color: blue">blue</span>.
       </p>
       <p>There are three types of parameters you can pass to <i>.sizeTo()</i>:</p>
       <p>
-        <b>DOM element</b>: A DOM element that will be measured and we will use the height of
-        <code>t.sizeTo(document.body);</code>
+        <b>DOM element</b>: A DOM element that will be measured and we will use the height of. E.g.: <code>t.sizeTo(document.body);</code>
       </p>
       <p>
-        <b>DOM query selector</b>: A DOM query selector that will select the node to measure and use the height of. E.g.: 
-        <code>t.sizeTo("#btn-content");</code>
+        <b>DOM query selector</b>: A DOM query selector that will select the node to measure and use the height of. E.g.: <code>t.sizeTo("#btn-content");</code>
       </p>
       <p>
         <b>Positive Number</b>: A positive number that will be used directly for the height. E.g.: <code>t.sizeTo(500);</code>
       </p>
-      <button class="mod-primary" id="document">sizeTo() document.body</button>
-      <button class="mod-primary" id="btn-content" >sizeTo() #content</button>
-      <button class="mod-primary" id="five-hundred">sizeTo() 500px</button>
+      <div style="width: 100%; text-align: center">
+        <button class="mod-primary" id="document">sizeTo() document.body</button>
+        <button class="mod-primary" id="btn-content" >sizeTo() #content</button>
+        <button class="mod-primary" id="five-hundred">sizeTo() 500px</button>
+      </div>
     </div>
     This is the <b>body</b>.
     <script src="./js/card-back-section.js"></script>

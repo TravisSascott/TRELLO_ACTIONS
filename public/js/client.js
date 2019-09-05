@@ -330,6 +330,7 @@ TrelloPowerUp.initialize({
     },
     {
       text: 'Try Out t.navigate()',
+      condition: 'always',
       callback: function(t){
         return t.popup({
           title: 't.navigate() Flavors',

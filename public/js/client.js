@@ -187,6 +187,25 @@ var boardButtonCallback = function(t){
             return t.closePopup();
           });
         }
+      },
+      {
+        text: 'Try Out t.navigate()',
+        callback: function(t){
+          return t.popup({
+            title: 'Snooze Card',
+            items: [{
+              // https://trello.com/b/K3k1CNLD/holiday-meal-planning?menu=filter&filter=label:Faux%20Thanks%20Giving
+              text: 't.navigate('')',
+              callback: function (t, opts) { ... }
+            }, {
+              text: 'In 1 hour',
+              callback: function (t, opts) { ... }
+            }, {
+              text: 'In 2 hours',
+              callback: function (t, opts) { ... }
+            }]
+          });
+        }
       }
     ]
   });

@@ -205,9 +205,10 @@ var restApiCardButtonCallback = function(t) {
       // open an iframe that has a button that, when clicked, calls .authorize for us.
       return t.popup({
         title: 'Authorize Trello\'s REST API',   
-        url: './settings.html',
+        url: './api-client-authorize.html',
       })
     } else {
+      ret
       alert('You\'re signed in!');
     }
   });

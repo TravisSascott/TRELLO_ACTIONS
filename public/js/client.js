@@ -529,6 +529,7 @@ TrelloPowerUp.initialize({
     }
   }
 }, {
+  targetOrigin: 'http://localhost:3000',
   appKey: '0471642aefef5fa1fa76530ce1ba4c85',
   appName: 'My Trello App'
 });

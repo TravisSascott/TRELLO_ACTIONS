@@ -37,6 +37,7 @@
         
         // Initialize the Power-Up client library and include your app name and API key
         var t = window.TrelloPowerUp.iframe({
+          targetOrigin: 'http://localhost:3000',
           appKey: '0471642aefef5fa1fa76530ce1ba4c85',
           appName: 'My Trello App'
         });
@@ -58,30 +59,27 @@
             console.log(err)
           } 
         }
-
-        t.render(function() {
-          t.getRestApi()
-          .getToken()
-          .then((token) => {
-            console.log('We\'ve received a token!')
-            if (!token) { 
-              console.log('We\'ve received a token!')
-              document.querySelector('button').addEventListener('click', function() {
-                t.getRestApi()
-                .authorize({ scope: 'read', expiration: '1hour' })
-                .then(function() {
-                  t.closePopup();
-                  alert('Successfully authorized')
-                });
+        
+        t.getRestApi()
+        .getToken()
+        .then((token) => {
+          console.log('We\'ve received a token!')
+          if (!token) { 
+            console.log('But it doesn\'t exist');
+            document.querySelector('button').addEventListener('click', function() {
+              t.getRestApi()
+              .authorize({ scope: 'read', expiration: '1hour' })
+              .then(function() {
+                t.closePopup();
+                alert('Successfully authorized')
               });
-            } else {
-              $("button").hide();
-              $("code").show();
-              makeRequest(token);
-            }
-          });
+            });
+          } else {
+            console.log('So we should make a request with it.');
+            $("button").hide();
+            makeRequest(token);
+          }
         });
-    
       });
     </script>
   </body>

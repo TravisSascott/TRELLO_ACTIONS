@@ -11,7 +11,7 @@
     <button type="button" class="mod-primary">Click to authorize</button>
     
     <!-- We'll use this code block to show the response from the Trello API -->
-    <code id="codeBlock" style="display: none;">
+    <code id="codeBlock">
     </code>
 
     
@@ -33,6 +33,8 @@
     
       $(document).ready(function() {
         
+        $("code").hide();
+        
         // Initialize the Power-Up client library and include your app name and API key
         var t = window.TrelloPowerUp.iframe({
           appKey: '0471642aefef5fa1fa76530ce1ba4c85',
@@ -40,9 +42,9 @@
         });
 
         let success = (response) => {
-          console.log('hai')
-          console.log(response)
-          // alert(JSON.stringify(response, null, 2));
+          $("button").hide();
+          $("code").html(JSON.stringify(response, null, 2));
+          $("code").show();
         }
 
         let error = (error) => {
@@ -51,7 +53,6 @@
         
         let makeRequest = (token) => {
           window.Trello.setToken(token);
-          console.log(token);
           try {
             window.Trello.members.get('me', success, error)
           } catch (err) {

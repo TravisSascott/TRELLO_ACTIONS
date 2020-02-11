@@ -208,8 +208,19 @@ var restApiCardButtonCallback = function(t) {
         url: './api-client-authorize.html',
       })
     } else {
-      ret
-      alert('You\'re signed in!');
+      return t.popup({
+        title: "Make a choice",
+        items: [{
+          title: 'Make an example request',
+          callback: () => t.popup({
+            title: 'Authorize Trello\'s REST API',   
+            url: './api-client-authorize.html',
+          })
+        }, {
+          : 'Unauthorize',
+          callback: () => t.getRestApi().clearToken().then(() => alert('You\'ve successfully deauthorized!')),
+        }]
+      })
     }
   });
 }

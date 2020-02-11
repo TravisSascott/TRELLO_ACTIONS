@@ -3,15 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>Authorize</title>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    
   </head>
   <body>
     
-    <button type="button">Click to authorize</button>
+    <button type="button" class="mod-primary">Click to authorize</button>
+    <code id="codeBlock">
+    </code>
 
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+      crossorigin="anonymous"></script>
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <!-- Don't forget to add your API key into the script tag for client.js! -->
     <script src="https://trello.com/1/client.js?key=0471642aefef5fa1fa76530ce1ba4c85"></script>
     <script>
-
       var t = window.TrelloPowerUp.iframe({
         appKey: '0471642aefef5fa1fa76530ce1ba4c85',
         appName: 'My Trello App'

@@ -197,12 +197,9 @@ var restApiCardButtonCallback = function(t) {
   .isAuthorized()
   .then(function(authorized) {
     if (!authorized) {
-      // You might be tempted to call client.authorize from a capability handler, for example, from a card-buttons callback.
-      // Unfortunately this does not register as a click by the browser, and it will block the consent popup. Instead, open 
-      // a t.popup from your card-button handler, and load an iframe that contains a button that calls client.authorize.
-      // 
-      // Since we're in a capability handler, we don't want to try to call .authorize right now. Instead, we're going to
-      // open an iframe that has a button that, when clicked, calls .authorize for us.
+      // You might be tempted to call client.authorize from a capability handler like the one we are in right now.
+      // Unfortunately this does not register as a click by the browser, and it will block the popup. Instead, we need to
+      // open a t.popup from our capability handler, and load an iframe that contains a button that calls client.authorize.
       return t.popup({
         title: 'Authorize Trello\'s REST API',   
         url: './api-client-authorize.html',
@@ -211,13 +208,15 @@ var restApiCardButtonCallback = function(t) {
       return t.popup({
         title: "Make a choice",
         items: [{
-          title: 'Make an example request',
+          // We'll use the client on the authorization page to make an example request.
+          text: 'Make an example request',
           callback: () => t.popup({
             title: 'Authorize Trello\'s REST API',   
             url: './api-client-authorize.html',
           })
         }, {
-          : 'Unauthorize',
+          // You can de-authorize the REST API client with a call to .clearToken()
+          text: 'Unauthorize',
           callback: () => t.getRestApi().clearToken().then(() => alert('You\'ve successfully deauthorized!')),
         }]
       })

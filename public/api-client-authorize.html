@@ -9,29 +9,54 @@
   <body>
     
     <button type="button" class="mod-primary">Click to authorize</button>
-    <code id="codeBlock">
+    
+    <!-- We'll use this code block to show the response from the Trello API -->
+    <code id="codeBlock" style="display: none;">
     </code>
 
+    
+    <!-- 
+      We're going to use client.js to help us make requests to Trello's API.
+      client.js is not the same as the client library for Power-Up's. client.js
+      is a helper library that is a wrapper for the API. It relies on jquery's
+      XHR methods, so we need to bring in jquery first
+    -->
+          
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
       crossorigin="anonymous"></script>
-    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    
     <!-- Don't forget to add your API key into the script tag for client.js! -->
     <script src="https://trello.com/1/client.js?key=0471642aefef5fa1fa76530ce1ba4c85"></script>
+    
+    <!-- And because we're ALSO doing Power-Up-related things, we still need the Power-Up client library -->
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    
     <script>
+    
+      // Initialize the Power-Up client library and include your app name and API key
       var t = window.TrelloPowerUp.iframe({
         appKey: '0471642aefef5fa1fa76530ce1ba4c85',
         appName: 'My Trello App'
       });
+      
+      let makeRequest = (token) => {
+        window.Trello.rest(method, path[, params], success, error)
+
+      }
 
       t.render(function() {
-        document.querySelector('button').addEventListener('click', function() {
-          t.getRestApi()
-            .authorize({ scope: 'read', expiration: '1hour' })
-            .then(function(t) {
-              alert('Success!');
-            });
+        t.getRestApi()
+        .isAuthorized()
+        .then(function(authorized) {
+          if (authorized) { 
+            document.querySelector('button').addEventListener('click', function() {
+            t.getRestApi()
+              .authorize({ scope: 'read', expiration: '1hour' })
+              .then(function(t) {
+                alert('Success!');
+              });
         }, false);
       });
     </script>

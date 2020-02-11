@@ -42,7 +42,6 @@
         });
 
         let success = (response) => {
-          $("button").hide();
           $("code").html(JSON.stringify(response, null, 2));
           $("code").show();
         }
@@ -64,7 +63,9 @@
           t.getRestApi()
           .getToken()
           .then((token) => {
+            console.log('We\'ve received a token!')
             if (!token) { 
+              console.log('We\'ve received a token!')
               document.querySelector('button').addEventListener('click', function() {
                 t.getRestApi()
                 .authorize({ scope: 'read', expiration: '1hour' })
@@ -74,6 +75,8 @@
                 });
               });
             } else {
+              $("button").hide();
+              $("code").show();
               makeRequest(token);
             }
           });

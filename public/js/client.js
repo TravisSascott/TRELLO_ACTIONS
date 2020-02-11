@@ -210,14 +210,23 @@ var restApiCardButtonCallback = function(t) {
         items: [{
           // We'll use the client on the authorization page to make an example request.
           text: 'Make an example request',
-          callback: () => t.popup({
-            title: 'Authorize Trello\'s REST API',   
-            url: './api-client-authorize.html',
-          })
+          callback: function(t) { 
+            return t.popup({
+              title: 'Authorize Trello\'s REST API',   
+              url: './api-client-authorize.html',
+            })
+          }
         }, {
           // You can de-authorize the REST API client with a call to .clearToken()
           text: 'Unauthorize',
-          callback: () => t.getRestApi().clearToken().then(() => alert('You\'ve successfully deauthorized!')),
+          callback: function(t) {
+            return t.getRestApi()
+              .clearToken()
+              .then(function() {
+                alert('You\'ve successfully deauthorized!'); 
+                t.closePopup(); 
+              })
+          }
         }]
       })
     }

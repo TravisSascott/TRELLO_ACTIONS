@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Authorize</title>
+  </head>
+  <body>
+    <button type="button">Click to authorize</button>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script>
+      var t = window.TrelloPowerUp.iframe({
+        {
+  appKey: '0471642aefef5fa1fa76530ce1ba4c85',
+  appName: 'My Trello App'
+}
+      });
+      t.render(function() {
+        document.querySelector('button').addEventListener('click', function() {
+          t.getRestApi()
+            .authorize({ scope: 'read,write' })
+            .then(function(t) {
+              alert('Success!');
+            });
+        }, false);
+      });
+    </script>
+  </body>
+</html>

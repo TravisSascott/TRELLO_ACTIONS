@@ -192,6 +192,27 @@ var boardButtonCallback = function(t){
   });
 };
 
+var restApiCardButtonCallback = function(t) {
+ return t.getRestApi()
+  .isAuthorized()
+  .then(function(authorized) {
+    if (!authorized) {
+      // You might be tempted to call client.authorize from a capability handler, for example, from a card-buttons callback.
+      // Unfortunately this does not register as a click by the browser, and it will block the consent popup. Instead, open 
+      // a t.popup from your card-button handler, and load an iframe that contains a button that calls client.authorize.
+      // 
+      // Since we're in a capability handler, we don't want to try to call .authorize right now. Instead, we're going to
+      // open an iframe that has a button that, when clicked, calls .authorize for us.
+      return t.popup({
+        title: 'Authorize Trello\'s REST API',   
+        url: './settings.html',
+      })
+    } else {
+      alert('You\'re signed in!');
+    }
+  });
+}
+
 var cardButtonCallback = function(t){
   // Trello Power-Up Popups are actually pretty powerful
   // Searching is a pretty common use case, so why reinvent the wheel
@@ -385,6 +406,10 @@ TrelloPowerUp.initialize({
       text: 'Just a URL',
       url: 'https://developers.trello.com',
       target: 'Trello Developer Site' // optional target for above url
+    }, {
+      icon: GRAY_ICON,
+      text: 'Use REST API',
+      callback: restApiCardButtonCallback,
     }];
   },
   'card-detail-badges': function(t, options) {

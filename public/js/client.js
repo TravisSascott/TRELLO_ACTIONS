@@ -483,6 +483,9 @@ TrelloPowerUp.initialize({
       console.log("🙈 Looks like you need to add your API key to the project!");
     }
   }
+}, {
+  appKey: '0471642aefef5fa1fa76530ce1ba4c85',
+  appName: 'My Trello App'
 });
 
 console.log('Loaded by: ' + document.referrer);

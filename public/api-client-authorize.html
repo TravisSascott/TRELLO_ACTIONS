@@ -4,20 +4,6 @@
     <meta charset="utf-8">
     <title>Authorize</title>
     <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
-
-    <!-- 
-      We're going to use client.js to help us make requests to Trello's API.
-      client.js is not the same as the client library for Power-Up's. client.js
-      is a helper library that is a wrapper for the API. It relies on jquery's
-      XHR methods, so we need to bring in jquery first
-    -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    
-    <!-- Don't forget to add your API key into the script tag for client.js! -->
-    <script src="https://trello.com/1/client.js?key=0471642aefef5fa1fa76530ce1ba4c85"></script>
-    
-    <!-- And because we're ALSO doing Power-Up-related things, we still need the Power-Up client library -->
-    <script src="https://p.trellocdn.com/power-up.min.js"></script>
     
   </head>
   <body>
@@ -28,17 +14,25 @@
     <code id="codeBlock" style="display: none;">
     </code>
 
-  
+    
+    <!-- 
+      We're going to use client.js to help us make requests to Trello's API.
+      client.js is not the same as the client library for Power-Up's. client.js
+      is a helper library that is a wrapper for the API. It relies on jquery's
+      XHR methods, so we need to bring in jquery first
+    -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+    <!-- Don't forget to add your API key into the script tag for client.js! -->
+    <script src="https://trello.com/1/client.js?key=0471642aefef5fa1fa76530ce1ba4c85"></script>
+    
+    <!-- And because we're ALSO doing Power-Up-related things, we still need the Power-Up client library -->
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
     
     <script>
     
       $(document).ready(function() {
         
-        let makeRequest = (token) => {
-          window.Trello.setToken(setToken);
-          window.Trello.members.get('me', success, error)
-        }
-      
         // Initialize the Power-Up client library and include your app name and API key
         var t = window.TrelloPowerUp.iframe({
           appKey: '0471642aefef5fa1fa76530ce1ba4c85',
@@ -46,11 +40,23 @@
         });
 
         let success = (response) => {
-          alert(JSON.stringify(response, null, 2));
+          console.log('hai')
+          console.log(response)
+          // alert(JSON.stringify(response, null, 2));
         }
 
         let error = (error) => {
           alert(JSON.stringify(error, null, 2));
+        }
+        
+        let makeRequest = (token) => {
+          window.Trello.setToken(token);
+          console.log(token);
+          try {
+            window.Trello.members.get('me', success, error)
+          } catch (err) {
+            console.log(err)
+          } 
         }
 
         t.render(function() {

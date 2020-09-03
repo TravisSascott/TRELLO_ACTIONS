@@ -223,7 +223,7 @@ var restApiCardButtonCallback = function(t) {
             return t.getRestApi()
               .clearToken()
               .then(function() {
-                alert('You\'ve successfully deauthorized!'); 
+                t.alert('You\'ve successfully deauthorized!'); 
                 t.closePopup(); 
               })
           }

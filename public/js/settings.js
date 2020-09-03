@@ -31,6 +31,7 @@ document.getElementById('save').addEventListener('click', function(){
     return t.set('board', 'shared', 'fruit', fruitSelector.value);
   })
   .then(function(){
+    t.alert({message: '🍉 Saved fruit!',  duration: 15, display: 'info'});
     t.closePopup();
   })
 })

@@ -1,7 +1,7 @@
 {
   "name": "power-up",
   "version": "0.0.1",
-  "description": "A sample Trello Power-Up that can be used as a starting point for your own awesome Power-Up.",
+  "description": "VTSAU power-up developed by Joan Sierra.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -21,5 +21,5 @@
     "trello",
     "glitch"
   ],
-  "license": "MIT"
+  "license": ""
 }

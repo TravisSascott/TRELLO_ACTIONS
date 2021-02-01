@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "repository": "https://github.com/trello/glitch-trello-power-up",
+  "repository": "",
   "dependencies": {
     "compression": "^1.7.1",
     "cors": "^2.8.5",

@@ -430,6 +430,24 @@ TrelloPowerUp.initialize({
       icon: GRAY_ICON,
       text: 'Use REST API',
       callback: restApiCardButtonCallback,
+    }, {
+      // usually you will provide a callback function to be run on button click
+      // we recommend that you use a popup on click generally
+      icon: GRAY_ICON, // don't use a colored icon here
+      text: 'Console LOG',
+      callback: function (t, options){
+        console.log("It is loggiong...!");
+      } 
+    }, { 
+      icon: GRAY_ICON,
+      text: 'CAJITA',
+      callback: function (t, options){
+        return t.popup({
+          title: 'POPITO',
+          url = './popito.html',
+          hright: 250
+        })
+      },
     }];
   },
   'card-detail-badges': function(t, options) {

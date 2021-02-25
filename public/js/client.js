@@ -149,7 +149,7 @@ var getBadges = function(t) {
 
 var boardButtonCallback = function(t) {
   return t.popup({
-    title: "Popup List Example",
+    title: "ACCIONES",
     items: [
       {
         text: "Open Modal",

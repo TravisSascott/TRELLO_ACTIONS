@@ -83,6 +83,9 @@ var GRAY_ICON =
 var WHITE_ICON =
   "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg";
 
+var BLACK_ICON = 
+  "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-black.svg";
+
 var randomBadgeColor = function() {
   return ["green", "yellow", "red", "none"][Math.floor(Math.random() * 4)];
 };
@@ -149,7 +152,7 @@ var getBadges = function(t) {
 
 var boardButtonCallback = function(t) {
   return t.popup({
-    title: "ACCIONES",
+    title: "EJEMPLO",
     items: [
       {
         text: "Open Modal",
@@ -392,7 +395,7 @@ TrelloPowerUp.initialize(
           // we can either provide a button that has a callback function
           // that callback function should probably open a popup, overlay, or boardBar
           icon: WHITE_ICON,
-          text: "ACC",
+          text: "EJEMPLO",
           condition: "always",
           callback: boardButtonCallback
         },
@@ -400,7 +403,7 @@ TrelloPowerUp.initialize(
           // or we can also have a button that is just a simple url
           // clicking it will open a new tab at the provided url
           icon: WHITE_ICON,
-          text: "URL",
+          text: "ACCIONES",
           url: "https://braludo-powerup-test.glitch.me/actions.html",
           target: "Inspiring Boards" // optional target for above url
         },

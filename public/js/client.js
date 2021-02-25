@@ -391,14 +391,7 @@ TrelloPowerUp.initialize(
     },
     "board-buttons": function(t, options) {
       return [
-        {
-          // we can either provide a button that has a callback function
-          // that callback function should probably open a popup, overlay, or boardBar
-          icon: WHITE_ICON,
-          text: "EJEMPLO",
-          condition: "always",
-          callback: boardButtonCallback
-        },
+        
         {
           // or we can also have a button that is just a simple url
           // clicking it will open a new tab at the provided url

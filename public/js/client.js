@@ -408,7 +408,7 @@ TrelloPowerUp.initialize(
           callback: function (t){
             return t.popup({
               title: "ACCIONES EN RETRASO",
-              url: "pareto_acciones_retraso.html"
+              url: "acciones.html"
             })
           }
         },

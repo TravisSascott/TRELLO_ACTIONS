@@ -401,6 +401,18 @@ TrelloPowerUp.initialize(
           target: "Inspiring Boards" // optional target for above url
         },
         {
+          // or we can also have a button that is just a simple url
+          // clicking it will open a new tab at the provided url
+          icon: WHITE_ICON,
+          text: "TEST POPUP",
+          callback: function (t){
+            return t.popup({
+              title: "ACCIONES EN RETRASO",
+              url: "pareto_acciones_retraso.html"
+            })
+          }
+        },
+        {
           text: "Try Out t.navigate()",
           condition: "always",
           callback: function(t) {

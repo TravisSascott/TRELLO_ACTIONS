@@ -542,35 +542,6 @@ function circle_pack_last(periodo, container, id){
 
 
 
-function colores_botones(id){
-    //console.log("Id pasado: ", id);
-    var boton_pulsado = document.getElementById(id);
-    //console.log(id.substr(id.length-1,1));
-    //console.log(id.length);
-    if (id.substr(id.length-1,1)=='i'){
-        document.getElementById('10i').classList.remove( 'w3-red');
-        document.getElementById('30i').classList.remove( 'w3-red');
-        document.getElementById('90i').classList.remove( 'w3-red');
-        document.getElementById('21i').classList.remove( 'w3-red');
-        document.getElementById('10i').classList.add( 'w3-light-blue');
-        document.getElementById('30i').classList.add( 'w3-light-blue');
-        document.getElementById('90i').classList.add( 'w3-light-blue');
-        document.getElementById('21i').classList.add( 'w3-light-blue');
-        boton_pulsado.classList.add( 'w3-red');
-    }else{
-        document.getElementById('10d').classList.remove( 'w3-red');
-        document.getElementById('30d').classList.remove( 'w3-red');
-        document.getElementById('90d').classList.remove( 'w3-red');
-        document.getElementById('21d').classList.remove( 'w3-red');
-        document.getElementById('10d').classList.add( 'w3-light-blue');
-        document.getElementById('30d').classList.add( 'w3-light-blue');
-        document.getElementById('90d').classList.add( 'w3-light-blue');
-        document.getElementById('21d').classList.add( 'w3-light-blue');
-        boton_pulsado.classList.add( 'w3-red');
-    }
-}
-
-
 
 //sun('.miarbol',treeData)
 
@@ -581,7 +552,7 @@ function colores_botones(id){
 
 function show_table(){
 
-tempor = JSON.parse(localStorage.getItem("table"));
+var tempor = JSON.parse(localStorage.getItem("table"));
 
 if (tempor != null){
 
@@ -656,133 +627,6 @@ function update (){
 //  Draw Circle Pack using D3.js  /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-function sun(container,data) {
-
-    //document.getElementById(id);
-
-    switch (container){
-
-            case '.izquierda':
-                if (document.getElementById("#grafico_izquierda") != null) {
-                        document.getElementById("#grafico_izquierda").remove();
-                        console.log("se ha borrado izquierda");
-                }
-                   
-                mi_atributo = "#grafico_izquierda";
-
-                break;
-            case '.derecha':
-                if (document.getElementById("#grafico_derecha") != null) {
-                        document.getElementById("#grafico_derecha").remove();
-                        console.log("se ha borrado derecha");
-                }
-                       
-              
-                mi_atributo = "#grafico_derecha";
-                break;
-        }
-
-     
-    
-
-  
-
-
-        
 
 
   
-
-  pack = data => d3.pack()
-    .size([width, height])
-    .padding(3)
-  (d3.hierarchy(data)
-    .sum(d => d.count)
-    .sort((a, b) => b.value - a.value));
-
-  const width = 932;
-  const height = width;
-  const format = d3.format(",d");
-  /*const color = d3.scaleLinear()
-    .domain([0, 5])
-    //.range(["hsl(30,80%,80%)", "hsl(30,100%,25%)"])
-    .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-    .interpolate(d3.interpolateHcl);*/
-const color = d3.scaleOrdinal(["#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603"]);
-
-
-  const root = pack(data);
-  let focus = root;
-  let view;
-
-
-
-  const svg = d3.select(container)
-
-      .append("svg")
-      .attr("viewBox", `-${width / 2} -${height / 2} ${width} ${height}`)
-      .attr("id",mi_atributo)
-      .style("display", "block")
-      .style("margin", "0 -14px")
-      .style("background", color(0))
-      .style("cursor", "pointer")
-      .on("click", (event) => zoom(event, root));
-
-  const node = svg.append("g")
-    .selectAll("circle")
-    .data(root.descendants().slice(1))
-    .join("circle")
-      .attr("fill", d => d.children ? color(d.depth) : "white")
-      .attr("pointer-events", d => !d.children ? "none" : null)
-      .on("mouseover", function() { d3.select(this).attr("stroke", "#000"); })
-      .on("mouseout", function() { d3.select(this).attr("stroke", null); })
-      .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
-
-  const label = svg.append("g")
-      .style("font", "14   sans-serif")
-      .attr("pointer-events", "none")
-      .attr("text-anchor", "middle")
-    .selectAll("text")
-    .data(root.descendants())
-    .join("text")
-      .style("fill-opacity", d => d.parent === root ? 1 : 0)
-      .style("display", d => d.parent === root ? "inline" : "none")
-      .style("font-weight", "bold")
-      .text(d => d.data.name + ": "+ d.value.toLocaleString());
-
-  zoomTo([root.x, root.y, root.r * 2]);
-
-  function zoomTo(v) {
-    const k = width / v[2];
-
-    view = v;
-
-    label.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
-    node.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
-    node.attr("r", d => d.r * k);
-  }
-
-  function zoom(event, d) {
-    const focus0 = focus;
-
-    focus = d;
-
-    const transition = svg.transition()
-        .duration(event.altKey ? 7500 : 750)
-        .tween("zoom", d => {
-          const i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2]);
-          return t => zoomTo(i(t));
-        });
-
-    label
-      .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-      .transition(transition)
-        .style("fill-opacity", d => d.parent === focus ? 1 : 0)
-        .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-        .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
-  }
-
-
-  
-  
-}

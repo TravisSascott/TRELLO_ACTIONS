@@ -7,15 +7,15 @@ var checklists_list = [];
 var checkitems_list = [];
 var items_to_chart = [];
 var items_to_table = [];
-current_board = '5d1f2656d29b04175a69af05'; // Gestión NQ clientes
+var current_board = '5d1f2656d29b04175a69af05'; // Gestión NQ clientes
 //inp_boards= ['5dce9f2b894e8e7279bfcc11']
-inp_boards= ['5dce9f2b894e8e7279bfcc11','5fb50dab335fed6e1b2034ba','5fb50e57727475751b4076f2']
-current_list = '';
-hoy = new Date();
-inp_to_sync = 0;
-viejo = Date.parse('2020-01-01');  //limit the data to 2021
+var inp_boards= ['5dce9f2b894e8e7279bfcc11','5fb50dab335fed6e1b2034ba','5fb50e57727475751b4076f2']
+var current_list = '';
+var hoy = new Date();
+var inp_to_sync = 0;
+var viejo = Date.parse('2020-01-01');  //limit the data to 2021
 
-mi_atributo = "";
+var mi_atributo = "";
 
 
 // Function called when update button is clicked
@@ -28,7 +28,7 @@ mi_atributo = "";
 
 async function getTrelloCards() {
  
-   last_update = localStorage.getItem("last_update");
+   var last_update = localStorage.getItem("last_update");
 
    //Obtain complete list of cards in the boards array 'inp_boards'
    // INPUT : boards array => inp_boards
@@ -37,18 +37,18 @@ async function getTrelloCards() {
    //           2 - JS object containing selected data to pass to next stage => cards_list
 
 
-    all_cards = [];  // Array of objects where put minimun info need per card (id,date,board,list)
-    cards_array = [];  // a list array with all the cards id only.  Used to check if new cards when updating
-    new_cards = []; //  a list array where we keep only the new cards after compare with card_array when updating
+    var all_cards = [];  // Array of objects where put minimun info need per card (id,date,board,list)
+    var cards_array = [];  // a list array with all the cards id only.  Used to check if new cards when updating
+    var new_cards = []; //  a list array where we keep only the new cards after compare with card_array when updating
     //cubiertas =0;  //internal counter for testing
     //hilo = 0;  //internal counter for testing
     //laminacion = 0;  //internal counter for testing
     
-    need_init_syncro = false ;  // boolean to know if first sync has been done or not
+    var need_init_syncro = false ;  // boolean to know if first sync has been done or not
     
 
-    c=0;
-    for (i=0;i<inp_boards.length;i++){  //whe look in all boards from the array inp_boards
+    var c=0;
+    for (var i=0;i<inp_boards.length;i++){  //whe look in all boards from the array inp_boards
 
         try {  // get card info from a board and store in all_cards
 
@@ -87,13 +87,13 @@ async function getTrelloCards() {
 
     
     // save all_card local in browser 
-   all_cards_local= localStorage.getItem("all_cards_local");
+   var all_cards_local= localStorage.getItem("all_cards_local");
 
    if (all_cards_local != null){
         all_cards_local= JSON.parse(localStorage.getItem("all_cards_local"));
         cards_array= JSON.parse(localStorage.getItem("all_cards_local_array"));
         if (all_cards_local.length < all_cards.length){
-            nuevas = all_cards.length - all_cards_local.length;
+            var nuevas = all_cards.length - all_cards_local.length;
             inp_to_sync = nuevas;
             alert ("Se han encontrado incidencias nuevas: " + nuevas);
 
@@ -123,8 +123,8 @@ async function getTrelloCards() {
         }else{
              alert ("No hay incidencias nuevas...");
              localStorage.setItem("last_update", Date.parse(hoy)); 
-             ultima = new Date(JSON.parse(localStorage.getItem("last_update")));
-            data_container = document.querySelector('.fecha');
+             var ultima = new Date(JSON.parse(localStorage.getItem("last_update")));
+            var data_container = document.querySelector('.fecha');
             data_container.innerHTML = "<b>ACTUALIZADO: " + ultima.toLocaleDateString();
              show_table();
         }
@@ -183,7 +183,7 @@ async function getTrelloCheckLists(cards){
 
 
 
-    temp = JSON.parse(localStorage.getItem("checklists_list"));
+    var temp = JSON.parse(localStorage.getItem("checklists_list"));
 
 
     if (temp != null){
@@ -191,8 +191,8 @@ async function getTrelloCheckLists(cards){
     }
 
 
-    c=0;
-    for (i=0;i<cards.length;i++){
+    var c=0;
+    for (var i=0;i<cards.length;i++){
 
         
 
@@ -218,7 +218,7 @@ async function getTrelloCheckLists(cards){
                             url: cards[i].url,
                             check_name: checklist.name,
                             check_id: checklist.id});
-                        container = document.querySelector('.container_2');
+                        var container = document.querySelector('.container_2');
                         container.innerHTML = html;
                         c++;
                         //console.log(checklists_list[c]);
@@ -251,18 +251,18 @@ async function getTrelloCheckLists(cards){
 async function getTrelloCheckItems(checklists_list){
 
 
-    temp = JSON.parse(localStorage.getItem("items_to_chart_local"));
+    var temp = JSON.parse(localStorage.getItem("items_to_chart_local"));
 
     if (temp != null){
         items_to_chart = temp;
     }
 
 
-    c = 1;
-    seccion='';
-    item_id=400;
+    var c = 1;
+    var seccion='';
+    var item_id=400;
 
-    for (i=0;i<checklists_list.length;i++){
+    for (var i=0;i<checklists_list.length;i++){
         item_id += 1;
         let url = 'https://api.trello.com/1/checklists/'+ checklists_list[i].check_id + '/checkitems?key=8ec6c3e51ab6d8dd92e69f3e23582eff&token=07843a91cede6b50196f92983c9be337105fd5336071710ea779bf2f70063f68';
         let res = await fetch(url);
@@ -273,14 +273,14 @@ async function getTrelloCheckItems(checklists_list){
                 let html = `<div class="alert alert-primary text-center"><h5>Analizando todas las <b>CAUSAS</b> ${c} de las INP</h5></div>`;
                 if ((checkitem.state == "complete") && (Date.parse(checklists_list[i].date)>=viejo) ){
                     //myitems.push([checklists_list[i][0],checklists_list[i][1],checklists_list[i][2],checklists_list[i][3],checklists_list[i][4],checklists_list[i][5],checklists_list[i][6],checklists_list[i][7],checkitem.name,checkitem.id]);
-                    t1= '3';
+                    var t1= '3';
 
                     //console.log(checklists_list[i].board);  
 
                     switch (checklists_list[i].board){
 
                         case '5dce9f2b894e8e7279bfcc11': //cubiertas
-                            t2='1';
+                            var t2='1';
                             break;
                         case '5fb50dab335fed6e1b2034ba': //hilo
                             t2='2';
@@ -293,7 +293,7 @@ async function getTrelloCheckItems(checklists_list){
                     switch (checklists_list[i].check_name){
 
                         case 'Calidad':
-                            t3='1';
+                            var t3='1';
                             break;
                         case 'OF':
                             t3='2';
@@ -310,7 +310,7 @@ async function getTrelloCheckItems(checklists_list){
                     } 
 
                     //console.log(d1+d2+d3);
-                    dts=(t1+t2+t3).toString();
+                    var dts=(t1+t2+t3).toString();
                     //dts= dt.toString();
                     items_to_chart.push({
                         id: item_id.toString(),
@@ -323,7 +323,7 @@ async function getTrelloCheckItems(checklists_list){
                     items_to_table.push([item_id.toString(), checkitem.name,checklists_list[i].date,checklists_list[i].url]);
 
                     //contenido += '"' + seccion + ',' + checklists_list[i][6]+ ',' + checkitem.name + ';'+ '"';
-                    container = document.querySelector('.container_2');
+                    var container = document.querySelector('.container_2');
                     container.innerHTML = html + " dentro";
                     c++;
                 } container = document.querySelector('.container_2');
@@ -350,14 +350,14 @@ async function getTrelloCheckItems(checklists_list){
 
 function circle_pack_all_data(container, id){
 
-    colores_botones(id);
+    //colores_botones(id);
 
-    ultima = new Date(JSON.parse(localStorage.getItem("last_update")));
-    data_container = document.querySelector('.fecha');
+    var ultima = new Date(JSON.parse(localStorage.getItem("last_update")));
+    var data_container = document.querySelector('.fecha');
     data_container.innerHTML = "<b>ACTUALIZADO: " + ultima.toLocaleDateString();
 
 
-       temp = JSON.parse(localStorage.getItem("items_to_chart_local"));
+       var temp = JSON.parse(localStorage.getItem("items_to_chart_local"));
 
         if (temp == null){
             alert ("No hay datos, iniciando sincronzación inicial...");
@@ -366,13 +366,13 @@ function circle_pack_all_data(container, id){
             items_to_chart = temp;
 
 
-            r = d3.groups(items_to_chart, d=> d.parent, d=> d.name);
+            var r = d3.groups(items_to_chart, d=> d.parent, d=> d.name);
 
-            final = [];
-            final_table= [];
+            var final = [];
+            var final_table= [];
 
-            for (i=0; i < r.length ; i++){
-                for (j=0; j < r[i][1].length ; j++){
+            for (var i=0; i < r.length ; i++){
+                for (var j=0; j < r[i][1].length ; j++){
                     final.push({id : r[i][1][j][0].substr(0,5) , name: r[i][1][j][1][0].name, count:r[i][1][j][1].length, parent:r[i][1][j][1][0].parent });
                 }
             }
@@ -419,7 +419,7 @@ function circle_pack_all_data(container, id){
                 d.parent = d.data.parent;
             });
 
-            sun(container,treeData)
+            //sun(container,treeData)
 
         }
 
@@ -430,7 +430,7 @@ function circle_pack_last(periodo, container, id){
 
 
     //console.log("antes de llamar colores");
-    colores_botones(id);
+    //colores_botones(id);
     let hoy = new Date();
     //console.log(container);
     //console.log(periodo);
@@ -438,7 +438,7 @@ function circle_pack_last(periodo, container, id){
     switch (periodo){
 
         case 'semana':
-            per = hoy.getTime()- 1000*60*60*24*10; 
+            var per = hoy.getTime()- 1000*60*60*24*10; 
             break;
         case 'mes':
             per=hoy.getTime()- 1000*60*60*24*30;
@@ -449,13 +449,13 @@ function circle_pack_last(periodo, container, id){
         
     }
     //console.log(per);
-    ultima = new Date(JSON.parse(localStorage.getItem("last_update")));
-    data_container = document.querySelector('.fecha');
+    var ultima = new Date(JSON.parse(localStorage.getItem("last_update")));
+    var data_container = document.querySelector('.fecha');
     data_container.innerHTML = "<b>ACTUALIZADO: " + ultima.toLocaleDateString();
 
 
-    temp_items_to_chart= [];
-    tempo = JSON.parse(localStorage.getItem("items_to_chart_local"));
+    var temp_items_to_chart= [];
+    var tempo = JSON.parse(localStorage.getItem("items_to_chart_local"));
 
     if (tempo == null){
         alert ("No hay datos, iniciando sincronzación inicial...");
@@ -484,13 +484,13 @@ function circle_pack_last(periodo, container, id){
         items_to_chart = temp_items_to_chart;
 
 
-        r = d3.groups(items_to_chart, d=> d.parent, d=> d.name);
+        var r = d3.groups(items_to_chart, d=> d.parent, d=> d.name);
 
-        final = [];
-        final_table= [];
+        var final = [];
+        var final_table= [];
 
-        for (i=0; i < r.length ; i++){
-            for (j=0; j < r[i][1].length ; j++){
+        for (var i=0; i < r.length ; i++){
+            for (var j=0; j < r[i][1].length ; j++){
                 final.push({id : r[i][1][j][0].substr(0,5) , name: r[i][1][j][1][0].name, count:r[i][1][j][1].length, parent:r[i][1][j][1][0].parent });
             }
         }
@@ -534,7 +534,7 @@ function circle_pack_last(periodo, container, id){
             d.count = d.data.count;
             d.parent = d.data.parent;
         });
-        sun(container,treeData);
+        //sun(container,treeData);
     }
     
 }
@@ -609,17 +609,6 @@ function purgar(){
 
 
 
-function update (){
-                
-    if (event.ctrlKey) {
-    purgar();
-    alert("Les dades s'han esborrat");
-    } else {
-    getTrelloCards();
-    
-    }
-                
-}
 
 
 

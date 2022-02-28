@@ -396,7 +396,7 @@ TrelloPowerUp.initialize(
           // or we can also have a button that is just a simple url
           // clicking it will open a new tab at the provided url
           icon: WHITE_ICON,
-          text: "ACCIONES",
+          text: "OLD_ACTIONS",
           url: "https://braludo-powerup-test.glitch.me/actions.html",
           target: "Inspiring Boards" // optional target for above url
         },
@@ -404,11 +404,11 @@ TrelloPowerUp.initialize(
           // or we can also have a button that is just a simple url
           // clicking it will open a new tab at the provided url
           icon: WHITE_ICON,
-          text: "TEST POPUP",
+          text: "ACCIONES",
           callback: function (t){
             return t.popup({
-              title: "ACCIONES EN RETRASO",
-              url: "acciones.html"
+              title: "ACCIONES DEFINIDAS EN EL TABLERO",
+              url: "board_actions.html"
             })
           }
         },

@@ -325,6 +325,39 @@ var cardButtonCallback = function(t) {
 
   
 TrelloPowerUp.initialize({
+  "board-buttons": function(t, options) {
+      return [
+        {
+          // or we can also have a button that is just a simple url
+          // clicking it will open a new tab at the provided url
+          icon: WHITE_ICON,
+          text: "ACCIONES",
+          callback: function (t){
+            return t.modal({
+                // the url to load for the iframe
+                url: './actions.html',
+                // optional arguments to be passed to the iframe as query parameters
+                // access later with t.arg('text')
+                args: { text: 'Hello' },
+                // optional color for header chrome
+                accentColor: '#4c2913',
+                // initial height for iframe
+                height: 600, // not used if fullscreen is true
+                // whether the modal should stretch to take up the whole screen
+                fullscreen: true,
+                // optional function to be called if user closes modal (via `X` or escape, etc)
+                callback: () => console.log('Goodbye.'),
+                // optional title for header chrome
+                title: 'CARGANDO ACCIONES DEL TABLERO',
+                // optional action buttons for header chrome
+                // max 3, up to 1 on right side
+                
+              })
+          }
+        },
+       
+      ];
+    },
   "board-buttons": function (t, opts) {
     return t.board("id").then(function (board) {
       

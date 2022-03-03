@@ -20,7 +20,7 @@ async function getActionsOnBoard() {
   
 
   const board = "5d1f2656d29b04175a69af05";
-
+  console.log (t.board);
   try {
     actionChecklists = [];
     checkItemsList = [];

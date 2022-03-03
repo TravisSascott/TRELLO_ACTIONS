@@ -326,8 +326,10 @@ var cardButtonCallback = function(t) {
   
 TrelloPowerUp.initialize({
   "board-buttons": function (t, opts) {
-    return t.board("id", "name").then(function (board) {
-      console.log(JSON.stringify(board, null, 2));
+    return t.board("id").then(function (board) {
+      
+      //console.log(JSON.stringify(board, null, 5));
+      console.log(board.id);
     });
   },
 },

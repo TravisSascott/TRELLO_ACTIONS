@@ -20,7 +20,8 @@ async function getActionsOnBoard() {
   
 
   const board = "5d1f2656d29b04175a69af05";
-  console.log (t.board);
+  var board_id = localStorage.getItem("board_id");
+  document.getElementById("board_id").innerHTML = board_id;
   try {
     actionChecklists = [];
     checkItemsList = [];

@@ -333,7 +333,7 @@ TrelloPowerUp.initialize({
           icon: WHITE_ICON,
           text: "ACCIONES",
           callback: function (t){
-            return t.modal({
+            return [t.modal({
                 // the url to load for the iframe
                 url: './actions.html',
                 // optional arguments to be passed to the iframe as query parameters
@@ -352,19 +352,16 @@ TrelloPowerUp.initialize({
                 // optional action buttons for header chrome
                 // max 3, up to 1 on right side
                 
-              })
+              }), t.board("id").then(function (board) {
+                sessionStorage.setItem("board_id",board.id);
+              console.log(board.id);
+            })]
           }
         },
        
       ];
     },
-  "board-buttons": function (t, opts) {
-    return t.board("id").then(function (board) {
-      
-      //console.log(JSON.stringify(board, null, 5));
-      console.log(board.id);
-    });
-  },
+ 
 },
   
   

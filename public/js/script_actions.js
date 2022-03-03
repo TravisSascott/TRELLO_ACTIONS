@@ -19,9 +19,8 @@ async function getActionsOnBoard() {
   
   
 
-  const board = "localStorage.getItem("board_id");
-  var board_id = localStorage.getItem("board_id");
-  document.getElementById("board_id").innerHTML = board_id;
+  const board = localStorage.getItem("board_id");
+  
   try {
     actionChecklists = [];
     checkItemsList = [];
@@ -88,6 +87,12 @@ async function getActionsOnBoard() {
                 break;
               case "5c8bcbebd7b95e4c477476e5":
                 checkitem.idMember = "MATHEW";
+                break;
+              case "5cfa39a5a314434ac56557ee":
+                checkitem.idMember = "CARLOS";
+                break;
+              case "5d14759c5762321bdd192de9":
+                checkitem.idMember = "Iban";
                 break;
             }
 

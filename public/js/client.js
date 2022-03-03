@@ -328,6 +328,11 @@ TrelloPowerUp.initialize(
     // If you need to make an asynchronous request or action before you can reply to Trello
     // you can return a Promise (bluebird promises are included at TrelloPowerUp.Promise)
     // The Promise should resolve to the object type that is expected to be returned
+    "board-buttons": function (t, opts) {
+      return t.board("id", "name").then(function (board) {
+        console.log(JSON.stringify(board, null, 2));
+        });
+      },
     "attachment-sections": function(t, options) {
       // options.entries is a list of the attachments for this card
       // you can look through them and 'claim' any that you want to

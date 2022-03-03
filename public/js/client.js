@@ -353,8 +353,9 @@ TrelloPowerUp.initialize({
                 // max 3, up to 1 on right side
                 
               }), t.board("id").then(function (board) {
-                sessionStorage.setItem("board_id",board.id);
-              console.log(board.id);
+                localStorage.setItem("board_id",board.id);
+              console.log("board_id des de Trello: ",board.id);
+              console.log("board_id des de session: ", localStorage.getItem("board_id"))
             })]
           }
         },

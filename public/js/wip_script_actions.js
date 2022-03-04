@@ -30,6 +30,7 @@ async function getActionsOnBoard() {
     let res = await fetch(url);
     members = await res.json();
     console.log(members);
+    sessionStorage.setItem("members", members)
     
   }catch(err){
     console.log(err);
@@ -71,7 +72,10 @@ async function getActionsOnBoard() {
             } else {
               checkitem.state = "CERRADA";
             }
-            members.forEach((member)=>{
+            let board_members = sessionStorage.getItem("members");
+            let bmembers = JSON.stringify(board_members);
+            console.log(bmembers);
+            board_members.forEach((member)=>{
               if (checkitem.idMember == member.id){
                 checkitem.idMember = member.fulName
               };

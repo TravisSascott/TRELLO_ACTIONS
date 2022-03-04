@@ -4,6 +4,7 @@ let checkItemsList = [];
 let checkItemsListIncomplete = [];
 let checkItemsListDelayed = [];
 let actions_to_print = [];
+let members = [];
 
 let fecha = new Date();
 
@@ -27,7 +28,7 @@ async function getActionsOnBoard() {
       board +
       "/members?key=8ec6c3e51ab6d8dd92e69f3e23582eff&token=07843a91cede6b50196f92983c9be337105fd5336071710ea779bf2f70063f68";
     let res = await fetch(url);
-    let members = await res.json();
+    members = await res.json();
     console.log(members);
     
   }catch(err){
@@ -70,8 +71,14 @@ async function getActionsOnBoard() {
             } else {
               checkitem.state = "CERRADA";
             }
-            members.forEach
-
+            members.forEach((member)=>{
+              if (checkitem.idMember == member.id){
+                checkitem.idMember = member.fulName
+              };
+            });
+            //if (checkitem.idMember.length != 24){
+            //  checkitem.idMember = "SIN ASIGNAR";
+            //}
             actions_to_print.push([
               checkitem.due.substr(0, 10),
               checkitem.state,

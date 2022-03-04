@@ -20,6 +20,22 @@ async function getActionsOnBoard() {
   
 
   const board = localStorage.getItem("board_id");
+  try{
+    
+      let url =
+      "https://api.trello.com/1/boards/" +
+      board +
+      "/members?key=8ec6c3e51ab6d8dd92e69f3e23582eff&token=07843a91cede6b50196f92983c9be337105fd5336071710ea779bf2f70063f68";
+    let res = await fetch(url);
+    let members = await res.json();
+    console.log(members);
+    
+  }catch(err){
+    console.log(err);
+  }
+
+  
+  
   
   try {
     actionChecklists = [];

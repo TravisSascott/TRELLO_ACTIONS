@@ -52,7 +52,7 @@ async function getActionsOnBoard() {
     console.log(url);
     let res = await fetch(url);
     let checklists = await res.json();
-    // console.log(checklists);
+    console.log(checklists);
     try {
       let counter = 0;
       

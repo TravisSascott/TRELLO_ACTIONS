@@ -130,7 +130,7 @@ async function getActionsOnBoard() {
   });
 }
 
-async function getActionsOnBoard() {
+async function getActionsOnBoard_filtered(filter) {
  
   
   try {
@@ -176,16 +176,32 @@ async function getActionsOnBoard() {
                 
               };
             });
-            if (checkitem.state== "ABIERTA"){
+            
+            switch (filter){
+              case 'ABIERTA':
+                if (checkitem.state== "ABIERTA"){
               
-            actions_to_print.push([
-              checkitem.due.substr(0, 10),
-              checkitem.state,
-              checkitem.idMember,
-              checkitem.name,
-              checklist.idCard,
-            ]);
+                  actions_to_print.push([
+                    checkitem.due.substr(0, 10),
+                    checkitem.state,
+                    checkitem.idMember,
+                    checkitem.name,
+                    checklist.idCard,
+                  ]);
+                };
+                break;
+              case 'CADUCADA':
+                if (checkitem.due < fecha){
+                  actions_to_print.push([
+                    checkitem.due.substr(0, 10),
+                    checkitem.state,
+                    checkitem.idMember,
+                    checkitem.name,
+                    checklist.idCard,
+                  ]);
+                }
             }
+            
           });
         }
       });

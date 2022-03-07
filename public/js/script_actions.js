@@ -252,9 +252,10 @@ async function getActionsOnBoard_filtered(filter) {
 
     var mitabla = $("#t_open").DataTable();
     $("#t_open tbody").on("click", "td", function () {
-      //if (mitabla.cell(this).data().length == 24) {
+      const content = mitabla.cell(this).data();
+      if (content.length == 24) {
         window.open("https://trello.com/c/" + mitabla.cell(this).data());
-      //}
+      }
     });
     // Hide columns
     //mitabla.columns([5, 6, 7]).visible(false);

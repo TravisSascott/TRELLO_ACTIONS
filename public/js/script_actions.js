@@ -194,7 +194,8 @@ async function getActionsOnBoard_filtered(filter) {
                 };
                 break;
               case 'CADUCADA':
-                if (checkitem.due < fecha){
+                let tempDate = new Date(checkitem.due);
+                if (tempDate < fecha && checkitem.state == "ABIERTA"){
               
                   actions_to_print.push([
                     checkitem.due.substr(0, 10),

@@ -32,7 +32,7 @@ async function getMembers(){
 }
 
 async function getActionsOnBoard() {
- 
+ actions_to_print = [];
   
   try {
     actionChecklists = [];
@@ -131,7 +131,7 @@ async function getActionsOnBoard() {
 }
 
 async function getActionsOnBoard_filtered(filter) {
- 
+  actions_to_print = [];
   
   try {
     actionChecklists = [];
@@ -177,6 +177,9 @@ async function getActionsOnBoard_filtered(filter) {
               };
             });
             
+            console.log("fecha checkitem", checkitem.due);
+            console.log("fecha actual", fecha);
+            
             switch (filter){
               case 'ABIERTA':
                 if (checkitem.state== "ABIERTA"){
@@ -192,6 +195,7 @@ async function getActionsOnBoard_filtered(filter) {
                 break;
               case 'CADUCADA':
                 if (checkitem.due < fecha){
+              
                   actions_to_print.push([
                     checkitem.due.substr(0, 10),
                     checkitem.state,
@@ -199,7 +203,16 @@ async function getActionsOnBoard_filtered(filter) {
                     checkitem.name,
                     checklist.idCard,
                   ]);
-                }
+                };
+                break;
+              default:
+                actions_to_print.push([
+                    checkitem.due.substr(0, 10),
+                    checkitem.state,
+                    checkitem.idMember,
+                    checkitem.name,
+                    checklist.idCard,
+                  ]);
             }
             
           });

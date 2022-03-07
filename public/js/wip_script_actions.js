@@ -21,8 +21,12 @@ async function getMembers(){
     //sessionStorage.setItem("members", members)
     members.forEach((member) =>{
       members.push([member.id, member.fullName]);
-    }console.log(members);
-  }catch(err){
+      console.log(member.id, member.fullName);
+    })
+    //console.log(members);
+    
+  
+}catch(err){
     console.log(err);
   }
 }

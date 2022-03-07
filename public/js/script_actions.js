@@ -4,8 +4,32 @@ let checkItemsList = [];
 let checkItemsListIncomplete = [];
 let checkItemsListDelayed = [];
 let actions_to_print = [];
-
+let members = [];
+const board = localStorage.getItem("board_id");
 let fecha = new Date();
+
+async function getMembers(){
+  try{
+    
+      let url =
+      "https://api.trello.com/1/boards/" +
+      board +
+      "/members?key=8ec6c3e51ab6d8dd92e69f3e23582eff&token=07843a91cede6b50196f92983c9be337105fd5336071710ea779bf2f70063f68";
+    let res = await fetch(url);
+    members = await res.json();
+    //console.log("board members: ", members);
+    //sessionStorage.setItem("members", members)
+    members.forEach((member) =>{
+      members.push([member.id, member.fullName]);
+      console.log(member.id, member.fullName);
+    })
+    //console.log(members);
+    
+  
+}catch(err){
+    console.log(err);
+  }
+}
 
 async function getActionsOnBoard() {
   // ID tablero GESTION RECLAMACIONES : 5d1f2656d29b04175a69af05
@@ -19,20 +43,8 @@ async function getActionsOnBoard() {
   
   
 
-  const board = localStorage.getItem("board_id");
-  try{
-    
-      let url =
-      "https://api.trello.com/1/boards/" +
-      board +
-      "/members?key=8ec6c3e51ab6d8dd92e69f3e23582eff&token=07843a91cede6b50196f92983c9be337105fd5336071710ea779bf2f70063f68";
-    let res = await fetch(url);
-    let members = await res.json();
-    console.log(members);
-    
-  }catch(err){
-    console.log(err);
-  }
+  //const board = localStorage.getItem("board_id");
+  
 
   
   
@@ -50,7 +62,7 @@ async function getActionsOnBoard() {
     console.log(url);
     let res = await fetch(url);
     let checklists = await res.json();
-     console.log(checklists);
+    console.log(checklists);
     try {
       let counter = 0;
       
@@ -70,48 +82,17 @@ async function getActionsOnBoard() {
             } else {
               checkitem.state = "CERRADA";
             }
-            switch (checkitem.idMember) {
-              case null:
-                checkitem.idMember = "SIN ASIGNAR";
-                break;
-              case "5d075c062c8c0354ed5e6c9e":
-                checkitem.idMember = "NURIA";
-                break;
-              case "5cf64fb8ba654f42ae7d5aaf":
-                checkitem.idMember = "NOELIA";
-                break;
-              case "5ce7866d3e41274383daf2a0":
-                checkitem.idMember = "JORDI";
-                break;
-              case "5cc02f09f1590d25ba244874":
-                checkitem.idMember = "IVAN";
-                break;
-              case "5cbecf4d9c2ccf362a75ed72":
-                checkitem.idMember = "JOAN";
-                break;
-              case "5caf5c6a453a312fd01f679e":
-                checkitem.idMember = "RAUL";
-                break;
-              case "5c78d11bb67f0004e9514299":
-                checkitem.idMember = "SERGIO";
-                break;
-              case "5b5872f9649295013a40ff14":
-                checkitem.idMember = "MARCOS";
-                break;
-              case "5addf2a95286994a13a44561":
-                checkitem.idMember = "BRUNO";
-                break;
-              case "5c8bcbebd7b95e4c477476e5":
-                checkitem.idMember = "MATHEW";
-                break;
-              case "5cfa39a5a314434ac56557ee":
-                checkitem.idMember = "CARLOS";
-                break;
-              case "5d14759c5762321bdd192de9":
-                checkitem.idMember = "Iban";
-                break;
+            if (checkitem.idMember == null) {
+              checkitem.idMember = "SIN ASIGNAR";
             }
-
+            
+            members.forEach((member)=>{
+              if (checkitem.idMember == member.id){
+                checkitem.idMember = member.fullName;
+                
+              };
+            });
+            
             actions_to_print.push([
               checkitem.due.substr(0, 10),
               checkitem.state,

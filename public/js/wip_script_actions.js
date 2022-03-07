@@ -82,17 +82,16 @@ async function getActionsOnBoard() {
             } else {
               checkitem.state = "CERRADA";
             }
-            let board_members = sessionStorage.getItem("members");
-            let bmembers = JSON.stringify(board_members);
-            console.log(bmembers);
-            board_members.forEach((member)=>{
+            
+            members.forEach((member)=>{
               if (checkitem.idMember == member.id){
-                checkitem.idMember = member.fulName
+                checkitem.idMember = member.fullName;
+                if (checkitem.idMember.length == 24){
+              checkitem.idMember = "SIN ASIGNAR";
+            }
               };
             });
-            //if (checkitem.idMember.length != 24){
-            //  checkitem.idMember = "SIN ASIGNAR";
-            //}
+            
             actions_to_print.push([
               checkitem.due.substr(0, 10),
               checkitem.state,

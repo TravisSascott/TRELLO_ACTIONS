@@ -348,7 +348,7 @@ TrelloPowerUp.initialize({
                 // optional function to be called if user closes modal (via `X` or escape, etc)
                 callback: () => console.log('Goodbye.'),
                 // optional title for header chrome
-                title: 'CARGANDO ACCIONES DEL TABLERO',
+                title: 'ACCIONES DEL TABLERO',
                 // optional action buttons for header chrome
                 // max 3, up to 1 on right side
                 

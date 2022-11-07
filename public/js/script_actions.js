@@ -45,8 +45,8 @@ async function getCards(){
     //console.log("board members: ", members);
     //sessionStorage.setItem("members", members)
     myCards.forEach((card) =>{
-      myCards.push([card.shortUrl, card.name]);
-      console.log(card.shortUrl, card.name);
+      myCards.push([card.id, card.shortUrl, card.name]);
+      console.log(card.id, card.shortUrl, card.name);
     })
     console.log(myCards);
     
@@ -207,6 +207,12 @@ async function getActionsOnBoard_filtered(filter) {
                 
               };
             });
+            
+            myCards.forEach((card)=>){
+              if (checklist.idCard == card.id){
+                
+            }
+                            }
             
             //console.log("fecha checkitem", checkitem.due);
             //console.log("fecha actual", fecha);

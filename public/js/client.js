@@ -331,7 +331,7 @@ TrelloPowerUp.initialize({
           // or we can also have a button that is just a simple url
           // clicking it will open a new tab at the provided url
           icon: WHITE_ICON,
-          text: "ACCIONES",
+          text: "ACTIONS",
           callback: function (t){
             return [t.modal({
                 // the url to load for the iframe

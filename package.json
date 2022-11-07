@@ -1,17 +1,17 @@
 {
   "name": "power-up",
-  "version": "0.0.1",
-  "description": "VTSAU power-up developed by Joan Sierra.",
+  "version": "0.2.0",
+  "description": "Vicente Torns Enterprise Power-up developed by Joan Sierra.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "repository": "",
   "dependencies": {
-    "compression": "^1.7.1",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "express": "^4.16.2",
-    "confetti-js": "^0.0.15"
+    "express": "^4.18.2",
+    "confetti-js": "^0.0.18"
   },
   "engines": {
     "node": "12"

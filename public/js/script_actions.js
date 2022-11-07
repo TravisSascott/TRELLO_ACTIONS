@@ -31,6 +31,8 @@ async function getMembers(){
   }
 }
 
+
+// not used, instead
 async function getActionsOnBoard() {
  actions_to_print = [];
   
@@ -53,7 +55,7 @@ async function getActionsOnBoard() {
       
       checklists.forEach((checklist) => {
         if (checklist.name == "ACCIONES" || checklist.name == "ACTIONS") {
-          console.log(checklist.name);
+          console.log(checklist.name + "helllo");
           actionChecklists.push(checklist);
           counter++;
           //console.log(counter)
@@ -152,7 +154,7 @@ async function getActionsOnBoard_filtered(filter) {
       let counter = 0;
       
       checklists.forEach((checklist) => {
-        if (checklist.name == "ACCIONES") {
+        if (checklist.name == "ACCIONES" || checklist.name == "ACTIONS") {
           actionChecklists.push(checklist);
           counter++;
           //console.log(counter)
@@ -178,8 +180,8 @@ async function getActionsOnBoard_filtered(filter) {
               };
             });
             
-            console.log("fecha checkitem", checkitem.due);
-            console.log("fecha actual", fecha);
+            //console.log("fecha checkitem", checkitem.due);
+            //console.log("fecha actual", fecha);
             
             switch (filter){
               case 'ABIERTA':

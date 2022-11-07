@@ -223,7 +223,7 @@ async function getActionsOnBoard_filtered(filter) {
                     checkitem.idMember,
                     checkitem.name,
                     checklist.idCard,
-                    myCards.checklist.idCard.name,
+                    
                   ]);
                 };
                 break;
@@ -237,7 +237,7 @@ async function getActionsOnBoard_filtered(filter) {
                     checkitem.idMember,
                     checkitem.name,
                     checklist.idCard,
-                    myCards.checklist.idCard.name,
+                    
                   ]);
                 };
                 break;
@@ -248,7 +248,7 @@ async function getActionsOnBoard_filtered(filter) {
                     checkitem.idMember,
                     checkitem.name,
                     checklist.idCard,
-                    myCards.checklist.idCard.name,
+                    
                   ]);
             }
             

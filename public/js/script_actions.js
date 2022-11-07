@@ -208,11 +208,7 @@ async function getActionsOnBoard_filtered(filter) {
               };
             });
             
-            myCards.forEach((card)=>){
-              if (checklist.idCard == card.id){
-                
-            }
-                            }
+            
             
             //console.log("fecha checkitem", checkitem.due);
             //console.log("fecha actual", fecha);
@@ -241,6 +237,7 @@ async function getActionsOnBoard_filtered(filter) {
                     checkitem.idMember,
                     checkitem.name,
                     checklist.idCard,
+                    myCards.checklist.idCard.name,
                   ]);
                 };
                 break;
@@ -251,6 +248,7 @@ async function getActionsOnBoard_filtered(filter) {
                     checkitem.idMember,
                     checkitem.name,
                     checklist.idCard,
+                    myCards.checklist.idCard.name,
                   ]);
             }
             
@@ -284,6 +282,7 @@ async function getActionsOnBoard_filtered(filter) {
         { title: "RESP.", width: "10%" },
         { title: "ACCIÓN", width: "65%" },
         { title: "CARD ID" },
+        { title: "CARD NAME"},
       ],
       colReorder: true,
     });

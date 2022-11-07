@@ -52,7 +52,8 @@ async function getActionsOnBoard() {
       let counter = 0;
       
       checklists.forEach((checklist) => {
-        if ((checklist.name == "ACCIONES") || (checklist.name == "ACTIONS")) {
+        if (checklist.name == "ACCIONES" || checklist.name == "ACTIONS") {
+          console.log(checklist.name);
           actionChecklists.push(checklist);
           counter++;
           //console.log(counter)

@@ -39,13 +39,14 @@ async function getCards(){
       "https://api.trello.com/1/boards/" +
       board +
       "/cards?key=8ec6c3e51ab6d8dd92e69f3e23582eff&token=07843a91cede6b50196f92983c9be337105fd5336071710ea779bf2f70063f68";
+    console.log(url);
     let res = await fetch(url);
     myCards = await res.json();
     //console.log("board members: ", members);
     //sessionStorage.setItem("members", members)
     myCards.forEach((card) =>{
-      myCards.push([card.id, card.fullName]);
-      console.log(card.id, card.fullName);
+      myCards.push([card.shortUrl, card.name]);
+      console.log(card.shortUrl, card.name);
     })
     console.log(myCards);
     

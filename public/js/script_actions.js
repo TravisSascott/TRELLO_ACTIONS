@@ -210,8 +210,9 @@ async function getActionsOnBoard_filtered(filter) {
             });
             
             myCards.forEach((card)=>{
-              if (checkitem.idCard == card.id){
-                checkitem.name = card.name + "--" + checkitem.name; 
+              //console.log(checklist.idCard + "-->" + card.id)
+              if (checklist.idCard == card.id){
+                checkitem.name = card.name + " --> " + checkitem.name; 
                 
               };
             });
@@ -290,7 +291,7 @@ async function getActionsOnBoard_filtered(filter) {
         { title: "STATUS", width: "10%" },
         { title: "RESP.", width: "10%" },
         { title: "ACTION", width: "65%" },
-        { title: "CARD ID" },
+        { title: "CARD ID-->LINK" },
         
       ],
       colReorder: true,

@@ -5,6 +5,7 @@ let checkItemsListIncomplete = [];
 let checkItemsListDelayed = [];
 let actions_to_print = [];
 let members = [];
+let myCards = [];
 const board = localStorage.getItem("board_id");
 let fecha = new Date();
 
@@ -30,6 +31,32 @@ async function getMembers(){
     console.log(err);
   }
 }
+
+async function getCards(){
+  try{
+    
+      let url =
+      "https://api.trello.com/1/boards/" +
+      board +
+      "/cards?key=8ec6c3e51ab6d8dd92e69f3e23582eff&token=07843a91cede6b50196f92983c9be337105fd5336071710ea779bf2f70063f68";
+    let res = await fetch(url);
+    myCards = await res.json();
+    //console.log("board members: ", members);
+    //sessionStorage.setItem("members", members)
+    myCards.forEach((card) =>{
+      myCards.push([card.id, card.fullName]);
+      console.log(card.id, card.fullName);
+    })
+    console.log(myCards);
+    
+  
+}catch(err){
+    console.log(err);
+  }
+}
+
+
+
 
 
 // not used anymore, instead use getActionsOnBoard_filtered(filter)

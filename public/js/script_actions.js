@@ -6,6 +6,7 @@ let checkItemsListDelayed = [];
 let actions_to_print = [];
 let members = [];
 let myCards = [];
+let sCards = [];
 const board = localStorage.getItem("board_id");
 let fecha = new Date();
 
@@ -207,6 +208,16 @@ async function getActionsOnBoard_filtered(filter) {
                 
               };
             });
+            
+            myCards.forEach((cards)=>{
+              if (cards.id == checkitem.idCard){
+                sCards.push([
+                  cards.name,
+                ]) 
+                
+              };
+            });
+            console.log(sCards)
             
             
             

@@ -32,7 +32,7 @@ async function getMembers(){
 }
 
 
-// not used, instead
+// not used anymore, instead use getActionsOnBoard_filtered(filter)
 async function getActionsOnBoard() {
  actions_to_print = [];
   
@@ -146,10 +146,10 @@ async function getActionsOnBoard_filtered(filter) {
       "https://api.trello.com/1/boards/" +
       board +
       "/checklists?key=8ec6c3e51ab6d8dd92e69f3e23582eff&token=07843a91cede6b50196f92983c9be337105fd5336071710ea779bf2f70063f68";
-    console.log(url);
+    //console.log(url);
     let res = await fetch(url);
     let checklists = await res.json();
-    console.log(checklists);
+    //console.log(checklists);
     try {
       let counter = 0;
       
@@ -165,12 +165,12 @@ async function getActionsOnBoard_filtered(filter) {
               checkitem.due = "1901-01-01";
             }
             if (checkitem.state == "incomplete") {
-              checkitem.state = "ABIERTA";
+              checkitem.state = "OPEN";
             } else {
-              checkitem.state = "CERRADA";
+              checkitem.state = "CLOSED";
             }
             if (checkitem.idMember == null) {
-              checkitem.idMember = "SIN ASIGNAR";
+              checkitem.idMember = "NOT ASSIGNED";
             }
             
             members.forEach((member)=>{
@@ -184,8 +184,8 @@ async function getActionsOnBoard_filtered(filter) {
             //console.log("fecha actual", fecha);
             
             switch (filter){
-              case 'ABIERTA':
-                if (checkitem.state== "ABIERTA"){
+              case 'OPEN':
+                if (checkitem.state== "OPEN"){
               
                   actions_to_print.push([
                     checkitem.due.substr(0, 10),
@@ -196,9 +196,9 @@ async function getActionsOnBoard_filtered(filter) {
                   ]);
                 };
                 break;
-              case 'CADUCADA':
+              case 'DELAYED':
                 let tempDate = new Date(checkitem.due);
-                if (tempDate < fecha && checkitem.state == "ABIERTA"){
+                if (tempDate < fecha && checkitem.state == "OPEN"){
               
                   actions_to_print.push([
                     checkitem.due.substr(0, 10),

@@ -209,11 +209,9 @@ async function getActionsOnBoard_filtered(filter) {
               };
             });
             
-            myCards.forEach((cards)=>{
-              if (cards.id == checkitem.idCard){
-                sCards.push([
-                  cards.name,
-                ]) 
+            myCards.forEach((card)=>{
+              if (checkitem.idCard == card.id){
+                checkitem.name = card.name + "--" + checkitem.name; 
                 
               };
             });
@@ -288,12 +286,12 @@ async function getActionsOnBoard_filtered(filter) {
       buttons: ["copy", "csv", "excel", "pdf", "print"],
       data: actions_to_print,
       columns: [
-        { title: "FECHA", width: "15%" },
-        { title: "ESTADO", width: "10%" },
+        { title: "DATE", width: "15%" },
+        { title: "STATUS", width: "10%" },
         { title: "RESP.", width: "10%" },
-        { title: "ACCIÓN", width: "65%" },
+        { title: "ACTION", width: "65%" },
         { title: "CARD ID" },
-        { title: "CARD NAME"},
+        
       ],
       colReorder: true,
     });

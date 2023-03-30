@@ -83,34 +83,34 @@ var GRAY_ICON =
 var WHITE_ICON =
   "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg";
 
-var BLACK_ICON = 
+var BLACK_ICON =
   "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-black.svg";
 
-var randomBadgeColor = function() {
+var randomBadgeColor = function () {
   return ["green", "yellow", "red", "none"][Math.floor(Math.random() * 4)];
 };
 
-var getBadges = function(t) {
+var getBadges = function (t) {
   return t
     .card("name")
     .get("name")
-    .then(function(cardName) {
+    .then(function (cardName) {
       console.log("We just loaded the card name for fun: " + cardName);
 
       return [
         {
           // dynamic badges can have their function rerun after a set number
           // of seconds defined by refresh. Minimum of 10 seconds.
-          dynamic: function() {
+          dynamic: function () {
             // we could also return a Promise that resolves to this as well if we needed to do something async first
             return {
               title: "Detail Badge", // for detail badges only
               text: "Dynamic " + (Math.random() * 100).toFixed(0).toString(),
               icon: GRAY_ICON, // for card front badges only
               color: randomBadgeColor(),
-              refresh: 10 // in seconds
+              refresh: 10, // in seconds
             };
-          }
+          },
         },
         {
           // its best to use static badges unless you need your badges to refresh
@@ -118,7 +118,7 @@ var getBadges = function(t) {
           title: "Detail Badge", // for detail badges only
           text: "Static",
           icon: GRAY_ICON, // for card front badges only
-          color: null
+          color: null,
         },
         {
           // card detail badges (those that appear on the back of cards)
@@ -127,14 +127,14 @@ var getBadges = function(t) {
           title: "Popup Detail Badge", // for detail badges only
           text: "Popup",
           icon: GRAY_ICON, // for card front badges only
-          callback: function(context) {
+          callback: function (context) {
             // function to run on click
             return context.popup({
               title: "Card Detail Badge Popup",
               url: "./settings.html",
-              height: 184 // we can always resize later, but if we know the size in advance, its good to tell Trello
+              height: 184, // we can always resize later, but if we know the size in advance, its good to tell Trello
             });
-          }
+          },
         },
         {
           // or for simpler use cases you can also provide a url
@@ -144,19 +144,19 @@ var getBadges = function(t) {
           text: "URL",
           icon: GRAY_ICON, // for card front badges only
           url: "https://trello.com/home",
-          target: "Trello Landing Page" // optional target for above url
-        }
+          target: "Trello Landing Page", // optional target for above url
+        },
       ];
     });
 };
 
-var boardButtonCallback = function(t) {
+var boardButtonCallback = function (t) {
   return t.popup({
     title: "EJEMPLO",
     items: [
       {
         text: "Open Modal",
-        callback: function(t) {
+        callback: function (t) {
           return t.modal({
             url: "./modal.html", // The URL to load for the iframe
             args: { text: "Hello", fullscreen: true }, // Optional args to access later with t.arg('text') on './modal.html'
@@ -171,59 +171,59 @@ var boardButtonCallback = function(t) {
                 icon: GRAY_ICON,
                 url: "https://google.com", // Opens the URL passed to it.
                 alt: "Leftmost",
-                position: "left"
+                position: "left",
               },
               {
                 icon: GRAY_ICON,
-                callback: tr =>
+                callback: (tr) =>
                   tr.popup({
                     // Callback to be called when user clicks the action button.
                     title: "Settings",
                     url: "settings.html",
-                    height: 164
+                    height: 164,
                   }),
                 alt: "Second from left",
-                position: "left"
+                position: "left",
               },
               {
                 icon: GRAY_ICON,
                 callback: () => console.log("🏎"),
                 alt: "Right side",
-                position: "right"
-              }
-            ]
+                position: "right",
+              },
+            ],
           });
-        }
+        },
       },
       {
         text: "Open Board Bar",
-        callback: function(t) {
+        callback: function (t) {
           return t
             .boardBar({
               url: "./board-bar.html",
-              height: 200
+              height: 200,
             })
-            .then(function() {
+            .then(function () {
               return t.closePopup();
             });
-        }
-      }
-    ]
+        },
+      },
+    ],
   });
 };
 
-var restApiCardButtonCallback = function(t) {
+var restApiCardButtonCallback = function (t) {
   return t
     .getRestApi()
     .isAuthorized()
-    .then(function(authorized) {
+    .then(function (authorized) {
       if (!authorized) {
         // You might be tempted to call client.authorize from a capability handler like the one we are in right now.
         // Unfortunately this does not register as a click by the browser, and it will block the popup. Instead, we need to
         // open a t.popup from our capability handler, and load an iframe that contains a button that calls client.authorize.
         return t.popup({
           title: "Authorize Trello's REST API",
-          url: "./api-client-authorize.html"
+          url: "./api-client-authorize.html",
         });
       } else {
         return t.popup({
@@ -232,49 +232,49 @@ var restApiCardButtonCallback = function(t) {
             {
               // We'll use the client on the authorization page to make an example request.
               text: "Make an example request",
-              callback: function(t) {
+              callback: function (t) {
                 return t.popup({
                   title: "Authorize Trello's REST API",
-                  url: "./api-client-authorize.html"
+                  url: "./api-client-authorize.html",
                 });
-              }
+              },
             },
             {
               // You can de-authorize the REST API client with a call to .clearToken()
               text: "Unauthorize",
-              callback: function(t) {
+              callback: function (t) {
                 return t
                   .getRestApi()
                   .clearToken()
-                  .then(function() {
+                  .then(function () {
                     t.alert("You've successfully deauthorized!");
                     t.closePopup();
                   });
-              }
-            }
-          ]
+              },
+            },
+          ],
         });
       }
     });
 };
 
-var cardButtonCallback = function(t) {
+var cardButtonCallback = function (t) {
   // Trello Power-Up Popups are actually pretty powerful
   // Searching is a pretty common use case, so why reinvent the wheel
   var items = ["acad", "arch", "badl", "crla", "grca", "yell", "yose"].map(
-    function(parkCode) {
+    function (parkCode) {
       var urlForCode = "http://www.nps.gov/" + parkCode + "/";
       var nameForCode = "🏞 " + parkCode.toUpperCase();
       return {
         text: nameForCode,
         url: urlForCode,
-        callback: function(t) {
+        callback: function (t) {
           // In this case we want to attach that park to the card as an attachment
           // but first let's ensure that the user can write on this model
           if (t.memberCanWriteToModel("card")) {
             return t
               .attach({ url: urlForCode, name: nameForCode })
-              .then(function() {
+              .then(function () {
                 // once that has completed we should tidy up and close the popup
                 return t.closePopup();
               });
@@ -284,7 +284,7 @@ var cardButtonCallback = function(t) {
             );
             return t.closePopup(); // We're just going to close the popup for now.
           }
-        }
+        },
       };
     }
   );
@@ -297,8 +297,8 @@ var cardButtonCallback = function(t) {
     search: {
       count: 5, // How many items to display at a time
       placeholder: "Search National Parks",
-      empty: "No parks found"
-    }
+      empty: "No parks found",
+    },
   });
 
   // in the above case we let Trello do the searching client side
@@ -323,56 +323,54 @@ var cardButtonCallback = function(t) {
 
 // We need to call initialize to get all of our capability handles set up and registered with Trello
 
-  
-TrelloPowerUp.initialize({
-  "board-buttons": function(t, options) {
+TrelloPowerUp.initialize(
+  {
+    "board-buttons": function (t, options) {
       return [
         {
           // or we can also have a button that is just a simple url
           // clicking it will open a new tab at the provided url
           icon: WHITE_ICON,
           text: "ACTIONS",
-          callback: function (t){
-            return [t.modal({
+          callback: function (t) {
+            return [
+              t.modal({
                 // the url to load for the iframe
-                url: './actions.html',
+                url: "./actions.html",
                 // optional arguments to be passed to the iframe as query parameters
                 // access later with t.arg('text')
-                args: { text: 'Hello' },
+                args: { text: "Hello" },
                 // optional color for header chrome
-                accentColor: '#4c2913',
+                accentColor: "#4c2913",
                 // initial height for iframe
                 height: 600, // not used if fullscreen is true
                 // whether the modal should stretch to take up the whole screen
                 fullscreen: true,
                 // optional function to be called if user closes modal (via `X` or escape, etc)
-                callback: () => console.log('Goodbye.'),
+                callback: () => console.log("Goodbye."),
                 // optional title for header chrome
-                title: 'BOARD ACTION TRACKING',
+                title: "BOARD ACTIONS TRACKING",
                 // optional action buttons for header chrome
                 // max 3, up to 1 on right side
-                
-              }), t.board("id").then(function (board) {
-                localStorage.setItem("board_id",board.id);
-              console.log("board_id des de Trello: ",board.id);
-              console.log("board_id des de session: ", localStorage.getItem("board_id"))
-            })]
-          }
+              }),
+              t.board("id").then(function (board) {
+                localStorage.setItem("board_id", board.id);
+                console.log("board_id des de Trello: ", board.id);
+                console.log(
+                  "board_id des de session: ",
+                  localStorage.getItem("board_id")
+                );
+              }),
+            ];
+          },
         },
-       
       ];
     },
- 
-},
-  
-  
-  
-  
-  
-  
+  },
+
   {
     appKey: "your_key_here",
-    appName: "My Trello App"
+    appName: "My Trello App",
   }
 );
 
